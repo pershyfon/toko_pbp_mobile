@@ -26,6 +26,7 @@ class MyHomePage extends StatelessWidget {
         title: const Text(
           'Toko PBP',
         ),
+        backgroundColor: Colors.deepPurple,
       ),
       body: SingleChildScrollView(
         // Widget wrapper yang dapat discroll
