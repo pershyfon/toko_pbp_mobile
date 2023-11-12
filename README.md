@@ -2,6 +2,49 @@
 ### NPM: 2206030520
 ### Kelas: PBP-C
 
+# Table of Contents
+* [Tugas 7](https://github.com/pershyfon/toko_pbp_mobile/blob/master/README.md#pbp-tugas-7)
+* [Tugas 8](https://github.com/pershyfon/toko_pbp_mobile/blob/master/README.md#pbp-tugas-8)
+
+# PBP Tugas 8
+## Perbedaan `Navigator.push()` dan `Navigator.pushReplacement()`
+Untuk berpindah dari satu halaman ke halaman lainnya pada Flutter, kita bisa menggunakan widget Navigator, seperti `Navigator.push()` dan `Navigator.pushReplacement()`. Ketika `Navigator.push()` dijalankan, tampilan halaman aplikasi akan berganti ke halaman lain. Jika tombol back ditekan, akan kembali ke halaman sebelumnya. `push()` menambahkan suatu route ke dalam stack route yang dikelola oleh Navigator. Method ini menyebabkan route yang ditambahkan berada pada paling atas stack sehingga route yang baru saja ditambahkan tersebut akan muncul dan ditampilkan kepada user. Contohnya adalah pergantian halaman sederhana, seperti dari halaman 'Home' ke halaman 'Lihat Produk'. 
+Namun, `Navigator.pushReplacement()` akan menampilkan halaman baru tanpa riwayat halaman sebelumnya atau tidak kembali ke halaman sebelumnya jika tombol back ditekan. Method pushReplacement() menghapus route yang sedang ditampilkan kepada pengguna dan menggantinya dengan suatu route. Method ini menyebabkan aplikasi untuk berpindah dari route yang sedang ditampilkan kepada pengguna ke suatu route yang diberikan. Route lama pada atas stack akan digantikan secara langsung oleh route baru yang diberikan tanpa mengubah kondisi elemen stack yang berada di bawahnya (perhatikan urutan stack). Contoh penggunaannya adalah halaman 'Login', setelah user berhasil login akan masuk ke halaman 'Home'. Untuk itu kita tidak menginginkan user kembali ke halaman 'Login' jika tombol back ditekan.
+## *layout* widget pada Flutter
+### Untuk mengatur ruang/jarak/posisi/penempatan widget-child:
+Container: Widget dasar untuk mengatur posisi, warna, dan ukuran layar dari beberapa widget-child
+Padding: Memberikan jarak dari dalam widget menuju widget lainnya
+Margin: Memberikan jarak di antara widget
+Align: Menempatkan widget di posisi topLeft, topRight, bottomLeft, bottomRight, dsb.
+Stack: Menempatkan widget di atas satu sama lain (bertumpuk)
+### Untuk menampilkan data/item yang dapat digulir
+Row: Mengatur posisi widget yang berada dalam row secara vertikal atau ke kiri
+Column: Mengatur posisi widget yang berada dalam column secara horizontal atau ke bawah
+ListView: Mengatur widget dalam daftar gulir vertikal atau horizontal
+### Untuk menampilkan data/item dalam bentuk tabel
+GridView: Mengatur widget dalam susunan dua dimensi
+## Elemen Input Form yang Digunakan
+Elemen-elemen input pada proyek ini menggunakan field `TextFormField` agar dapat dilakukan validasi dan integrasi, yaitu:
+1) Nama Ramuan (String karena nama ramuan berupa teks)
+2) Jumlah (int karena jumlah berupa digit angka)
+3) Harga (int karena harga berupa digit angka)
+4) Deskripsi (String karena deskripsi berupa teks)
+## Penerapan *Clean Architecture* pada Flutter
+*Clean Architecture* adalah pola desain perangkat lunak yang membantu para developer menulis kode yang dapat dipelihara dan dapat di-scale. Dengan memisahkan lapisan business logic, presenter/UI, state management, eksternal datasources, dan repository, menjadi lebih mudah untuk memodifikasi dan memperluas kode tanpa menambahkan kompleksitas yang tidak perlu. Seperti proyek ini memisahkan menu.dart dan shoplist-form.dart yang merupakan presenter/UI halaman dengan left_drawer.dart dan shop_card.dart yang merupakan business logic.
+## Langkah Implementasi Checklist
+1. Membuat shoplist_form.dart untuk halaman formulir tambah ramuan yang memiliki 4 elemen input: `name`, `amount`, `price`, dan `description`, tombol save, validasi tiap elemen, dan pop up data item setelah save form
+2. Memindahkan class ShopItem dan ShopCard dari menu.dart ke file baru shop_card.dart
+3. Pada shop_card.dart, mengatur Navigator.push() atau routing dari card `Tambah Ramuan` di halaman utama ke halaman formulir
+4. Membuat left_drawer.dart untuk drawer yang memiliki opsi `Halaman Utama` yang akan routing ke halaman utama jika ditekan dan `Tambah Ramuan` yang akan routing ke halaman formulir jika ditekan
+5. Membuat shop_card.dart untuk widget card yang menampilkan produk ramuan
+6. Membuat items.dart untuk halaman daftar ramuan yang akan menampilkan card dari shop_card.dart
+7. Menambahkan `ListTile` Lihat Ramuan di left_drawer.dart yang route ke halaman daftar ramuan
+8. Menambahkan routing dari card Lihat Ramuan di halaman utama ke halaman daftar ramuan pada shop_card.dart
+9. Add, commit "menyelesaikan tugas 8", dan push ke Github
+#### Referensi:
+- https://ngasturi.id/2020/01/04/flutter-navigasi-antar-halaman/
+- https://medium.com/komandro-ccit-ftui/tutorial-flutter-layout-be8cfb66904a
+
 # PBP Tugas 7
 ## Perbedaan *Stateless* dan *Stateful Widget* dalam Flutter
 Stateless dan stateful widget digunakan untuk membangun antarmuka pengguna (UI) pada pengembangan flutter. Perbedaan utama antara keduanya adalah dalam cara mereka mengelola dan merespons perubahan dalam data atau keadaan.
