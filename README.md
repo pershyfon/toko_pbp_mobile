@@ -40,7 +40,10 @@ Elemen-elemen input pada proyek ini menggunakan field `TextFormField` agar dapat
 6. Membuat items.dart untuk halaman daftar ramuan yang akan menampilkan card dari shop_card.dart
 7. Menambahkan `ListTile` Lihat Ramuan di left_drawer.dart yang route ke halaman daftar ramuan
 8. Menambahkan routing dari card Lihat Ramuan di halaman utama ke halaman daftar ramuan pada shop_card.dart
-9. Add, commit "menyelesaikan tugas 8", dan push ke Github
+9. Membuat direktori baru `screens` dan `widgets` di direktori `lib`
+10. Memindahkan items.dart, menu.dart, dan shoplist_form.dart ke direktori `screens`
+11. Memindahkan items_card.dart, left_drawer.dart, dan shop_card.dart ke direktori `widgets`
+12. Add, commit "menyelesaikan tugas 8", dan push ke Github
 #### Referensi:
 - https://ngasturi.id/2020/01/04/flutter-navigasi-antar-halaman/
 - https://medium.com/komandro-ccit-ftui/tutorial-flutter-layout-be8cfb66904a
