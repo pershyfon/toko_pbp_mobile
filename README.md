@@ -10,19 +10,19 @@
 ## Perbedaan `Navigator.push()` dan `Navigator.pushReplacement()`
 Untuk berpindah dari satu halaman ke halaman lainnya pada Flutter, kita bisa menggunakan widget Navigator, seperti `Navigator.push()` dan `Navigator.pushReplacement()`. Ketika `Navigator.push()` dijalankan, tampilan halaman aplikasi akan berganti ke halaman lain. Jika tombol back ditekan, akan kembali ke halaman sebelumnya. `push()` menambahkan suatu route ke dalam stack route yang dikelola oleh Navigator. Method ini menyebabkan route yang ditambahkan berada pada paling atas stack sehingga route yang baru saja ditambahkan tersebut akan muncul dan ditampilkan kepada user. Contohnya adalah pergantian halaman sederhana, seperti dari halaman 'Home' ke halaman 'Lihat Produk'. 
 Namun, `Navigator.pushReplacement()` akan menampilkan halaman baru tanpa riwayat halaman sebelumnya atau tidak kembali ke halaman sebelumnya jika tombol back ditekan. Method pushReplacement() menghapus route yang sedang ditampilkan kepada pengguna dan menggantinya dengan suatu route. Method ini menyebabkan aplikasi untuk berpindah dari route yang sedang ditampilkan kepada pengguna ke suatu route yang diberikan. Route lama pada atas stack akan digantikan secara langsung oleh route baru yang diberikan tanpa mengubah kondisi elemen stack yang berada di bawahnya (perhatikan urutan stack). Contoh penggunaannya adalah halaman 'Login', setelah user berhasil login akan masuk ke halaman 'Home'. Untuk itu kita tidak menginginkan user kembali ke halaman 'Login' jika tombol back ditekan.
-## *layout* widget pada Flutter
+## *Layout widget* pada Flutter
 ### Untuk mengatur ruang/jarak/posisi/penempatan widget-child:
-Container: Widget dasar untuk mengatur posisi, warna, dan ukuran layar dari beberapa widget-child
-Padding: Memberikan jarak dari dalam widget menuju widget lainnya
-Margin: Memberikan jarak di antara widget
-Align: Menempatkan widget di posisi topLeft, topRight, bottomLeft, bottomRight, dsb.
-Stack: Menempatkan widget di atas satu sama lain (bertumpuk)
+- Container: Widget dasar untuk mengatur posisi, warna, dan ukuran layar dari beberapa widget-child
+- Padding: Memberikan jarak dari dalam widget menuju widget lainnya
+- Margin: Memberikan jarak di antara widget
+- Align: Menempatkan widget di posisi topLeft, topRight, bottomLeft, bottomRight, dsb.
+- Stack: Menempatkan widget di atas satu sama lain (bertumpuk)
 ### Untuk menampilkan data/item yang dapat digulir
-Row: Mengatur posisi widget yang berada dalam row secara vertikal atau ke kiri
-Column: Mengatur posisi widget yang berada dalam column secara horizontal atau ke bawah
-ListView: Mengatur widget dalam daftar gulir vertikal atau horizontal
+- Row: Mengatur posisi widget yang berada dalam row secara vertikal atau ke kiri
+- Column: Mengatur posisi widget yang berada dalam column secara horizontal atau ke bawah
+- ListView: Mengatur widget dalam daftar gulir vertikal atau horizontal
 ### Untuk menampilkan data/item dalam bentuk tabel
-GridView: Mengatur widget dalam susunan dua dimensi
+- GridView: Mengatur widget dalam susunan dua dimensi
 ## Elemen Input Form yang Digunakan
 Elemen-elemen input pada proyek ini menggunakan field `TextFormField` agar dapat dilakukan validasi dan integrasi, yaitu:
 1) Nama Ramuan (String karena nama ramuan berupa teks)
