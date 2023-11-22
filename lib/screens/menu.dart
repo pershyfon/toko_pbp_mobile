@@ -6,8 +6,8 @@ class MyHomePage extends StatelessWidget {
   MyHomePage({Key? key}) : super(key: key);
 
   final List<ShopItem> items = [
-    ShopItem("Lihat Ramuan", Icons.checklist, Colors.pinkAccent),
-    ShopItem("Tambah Ramuan", Icons.add_shopping_cart, Colors.redAccent),
+    ShopItem("Lihat Item", Icons.checklist, Colors.pinkAccent),
+    ShopItem("Tambah Item", Icons.add_shopping_cart, Colors.redAccent),
     ShopItem("Logout", Icons.logout, Colors.purpleAccent),
   ];
 
@@ -34,7 +34,7 @@ class MyHomePage extends StatelessWidget {
                 padding: EdgeInsets.only(top: 10.0, bottom: 10.0),
                 // Widget Text untuk menampilkan tulisan dengan alignment center dan style yang sesuai
                 child: Text(
-                  'Potion in Pot', // Text yang menandakan toko
+                  'Menu', // Text yang menandakan toko
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 30,

@@ -5,6 +5,97 @@
 # Table of Contents
 * [Tugas 7](https://github.com/pershyfon/toko_pbp_mobile/blob/master/README.md#pbp-tugas-7)
 * [Tugas 8](https://github.com/pershyfon/toko_pbp_mobile/blob/master/README.md#pbp-tugas-8)
+* [Tugas 9](https://github.com/pershyfon/toko_pbp_mobile/blob/master/README.md#pbp-tugas-9)
+
+# PBP Tugas 9
+## Apakah bisa kita melakukan pengambilan data JSON tanpa membuat model terlebih dahulu? Jika iya, apakah hal tersebut lebih baik daripada membuat model sebelum melakukan pengambilan data JSON?
+Iya, bisa. Namun, pembuatan model dapat memudahkan pengelolaan data dan meningkatkan kejelasan kode. Model digunakan untuk mendefinisikan struktur data dengan jelas, memberikan tipe data yang tepat, dan menyediakan dokumentasi yang baik sehingga dapat mempermudah pemahaman dan pemeliharaan kode. Jadi, meskipun mungkin memungkinkan untuk melakukan pengambilan data tanpa model, lebih baik membuat model untuk kejelasan dan pemeliharaan kode yang lebih baik.
+## Fungsi CookieRequest
+`CookieRequest` memfasilitasi penyimpanan, pengambilan, dan pembaruan cookie dalam konteks permintaan HTTP.
+Ini dapat menyediakan metode atau properti untuk menangani cookie, seperti menambahkan, menghapus, atau mengambil nilai cookie. `CookieRequest` dapat berperan dalam manajemen keamanan dan otorisasi dengan menyimpan informasi otentikasi atau token ke dalam cookie.
+### Mengapa *instance* CookieRequest perlu untuk dibagikan ke semua komponen di aplikasi Flutter?
+Ketika sebuah objek state seperti `CookieRequest` diakses atau diubah oleh beberapa komponen di seluruh aplikasi, sharing *instance* melalui Provider memastikan bahwa semua komponen menggunakan objek yang sama. Provider adalah solusi manajemen state di Flutter yang memungkinkan komponen untuk mengakses dan memperbarui state tanpa harus secara eksplisit melewatkan objek state dari satu komponen ke komponen lainnya. Dengan menggunakan *instance* `CookieRequest` yang dibagikan, setiap komponen yang menggunakan `CookieRequest` akan mendapatkan pembaruan saat ada perubahan pada objek tersebut. Ini memastikan bahwa semua komponen dapat merespons perubahan state secara otomatis. Membagikan instance `CookieRequest` melalui Provider menyederhanakan manajemen state dan meningkatkan kejelasan kode, karena komponen dapat mengakses state yang dibutuhkan tanpa harus menangani logika pengelolaan state sendiri.
+## Mekanisme Pengambilan Data dari JSON pada Tampilan Flutter
+Pertama, data JSON diambil melalui permintaan HTTP. Selanjutnya, data JSON didekode menjadi objek Dart menggunakan method `json.decode()`. Objek Dart tersebut kemudian digunakan untuk membuat model. Terakhir, komponen UI seperti widget digunakan untuk menampilkan data dari model atau objek Dart tersebut ke layar.
+## Mekanisme Autentikasi Terintegrasi Django-Flutter
+Pertama, pengguna menginput data akun pada UI Flutter. Data tersebut kemudian dikirim ke backend Django melalui permintaan HTTP POST request menggunakan API autentikasi yang telah didefinisikan di Django. Django akan memeriksa dan mengotentikasi data yang diterima. Jika autentikasi berhasil, Django akan menghasilkan token atau memberikan izin akses. Token atau izin tersebut kemudian dikirim kembali ke aplikasi Flutter. Aplikasi Flutter menggunakan token atau izin tersebut untuk mengidentifikasi pengguna dan memperoleh data yang diizinkan, termasuk tampilan menu yang sesuai.
+## *Widget* yang Digunakan
+- `Stateful widget`: Membuat halaman baru
+- `build`: Membuat antarmuka pengguna untuk halaman
+- `Container`: Widget utama yang membungkus seluruh antarmuka pengguna dengan dekorasi tertentu
+- `Scaffold`: Berisi halaman utama aplikasi
+- `SingleChildScrollView`: Memungkinkan scroll ketika keyboard muncul
+- `Form`: Formulir register/login
+- `TextFormField`: Field input
+- `TextButton`: Tombol untuk melakukan sesuatu
+- `GestureDetector`: Untuk menavigasi ke halaman lain
+- `SnackBar`: Menampilkan pesan setelah request berhasil atau gagal
+## Langkah Implementasi Checklist
+### Autentikasi
+1. Membuat aplikasi baru `authentication` pada Django dengan views.py fungsi untuk login. logout, dan register
+2. Membuat routing dalam aplikasi ke fungsi login, logout, dan register
+3. Menambahkan `django-cors-headers` pada requirements.txt dan menjalankan `pip install -m requirements.txt`
+4. Menambahkan `INSTALLED_APPS`, `MIDDLEWARE`, dan variabel berikut pada settings.py toko_pbp
+```shell
+...
+INSTALLED_APPS = [
+  ...
+  'authentication',
+  'corsheaders',
+]
+...
+
+MIDDLEWARE = [
+    ...
+    'corsheaders.middleware.CorsMiddleware',
+]
+...
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOW_CREDENTIALS = True
+CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SAMESITE = 'None'
+SESSION_COOKIE_SAMESITE = 'None'
+```
+5. Menjalankan `flutter pub add provider` dan `flutter pub add pbp_django_auth` pada terminal aplikasi flutter
+6. Membuat file `lib/screens/login.dart`, `lib/screens/register.dart`, dan menambahkan kode berikut pada `lib/widgets/shop_card.dart` 
+```shell
+if (item.name == "Logout") {
+  final response = await request.logout(
+      "http:/127.0.0.1:8000/auth/logout/");
+  String message = response["message"];
+  if (response['status']) {
+    String uname = response["username"];
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      content: Text("$message Sampai jumpa, $uname."),
+    ));
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (context) => const LoginPage()),
+    );
+  } else {
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      content: Text("$message"),
+    ));
+  }
+}
+```
+### Menampilkan item
+1. Menjalankan `flutter pub add http` pada terminal aplikasi flutter
+2. Menambahkan kode berikut pada `android/app/src/main/AndroidManifest.xml`
+```shell
+...
+</application>
+<!-- Required to fetch data from the Internet. -->
+<uses-permission android:name="android.permission.INTERNET" />
+...
+```
+3. Menambahkan fungsi `create_product_flutter` dan `show_json_user` pada views.py Django beserta routing urlnya
+4. Membuat berkas `lib/models/ramuan.dart`, `lib/screens/show_ramuan.dart`, dan `lib/screens/detail_ramuan.dart`
+5. Memperbarui `lib/screens/menu.dart` dan `lib/screens/shoplist_form.dart`
+### Redeployment Django
+1. Git add, commit, dan push web Django
 
 # PBP Tugas 8
 ## Perbedaan `Navigator.push()` dan `Navigator.pushReplacement()`

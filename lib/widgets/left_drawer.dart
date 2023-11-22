@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:toko_pbp_mobile/screens/items.dart';
+import 'package:toko_pbp_mobile/screens/list_items.dart';
 import 'package:toko_pbp_mobile/screens/menu.dart';
 import 'package:toko_pbp_mobile/screens/shoplist_form.dart';
 
@@ -18,7 +18,7 @@ class LeftDrawer extends StatelessWidget {
             child: Column(
               children: [
                 Text(
-                  'Potion in Pot',
+                  'Toko PBP',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 30,
@@ -48,19 +48,19 @@ class LeftDrawer extends StatelessWidget {
           ),
           ListTile(
             leading: const Icon(Icons.checklist),
-            title: const Text('Lihat Ramuan'),
+            title: const Text('Lihat Item'),
             // Bagian redirection ke ShowRamuanPage
             onTap: () {
               Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => ShowRamuanPage(),
+                    builder: (context) => const ShowItemPage(),
                   ));
             },
           ),
           ListTile(
             leading: const Icon(Icons.add_shopping_cart),
-            title: const Text('Tambah Ramuan'),
+            title: const Text('Tambah Item'),
             // Bagian redirection ke ShopFormPage
             onTap: () {
               Navigator.pushReplacement(
